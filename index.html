@@ -4,20 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miftāḥ — Islamisches Schlüsselwörterbuch</title>
+<link rel="icon" href="assets/miftah-icon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:#F7F8FB; --card:#FFFFFF; --card-soft:#FAFBFD;
-  --ink:#0F172A; --ink-soft:#475569; --ink-mute:#94A3B8;
-  --border:#E2E8F0; --border-soft:#EEF2F7;
-  --accent:#4F46E5; --accent-soft:#EEF0FF; --accent-hover:#4338CA;
-  --pflicht-bg:#4F46E5; --pflicht-fg:#FFFFFF;
-  --option-bg:#FEF3C7; --option-fg:#92400E;
-  --good-bg:#DCFCE7; --good-fg:#166534;
-  --mid-bg:#FEF3C7; --mid-fg:#854D0E;
-  --bad-bg:#FEE2E2; --bad-fg:#991B1B;
+  --bg:#F3F6F5; --card:#FFFFFF; --card-soft:#F8FAF9;
+  --ink:#101820; --ink-soft:#41515E; --ink-mute:#6E7F8C;
+  --border:#D9E2E0; --border-soft:#E8EFED;
+  --accent:#0F6F65; --accent-soft:#E5F2EF; --accent-hover:#0A554D;
+  --gold:#B8872F; --gold-soft:#FFF4D6;
+  --pflicht-bg:#0F6F65; --pflicht-fg:#FFFFFF;
+  --option-bg:#FFF4D6; --option-fg:#725012;
+  --good-bg:#DDF7EA; --good-fg:#12633E;
+  --mid-bg:#FFF4D6; --mid-fg:#725012;
+  --bad-bg:#FDE7E1; --bad-fg:#8F2B1E;
   --shadow-sm:0 1px 2px rgba(15,23,42,.04),0 1px 1px rgba(15,23,42,.03);
   --shadow-md:0 4px 6px -1px rgba(15,23,42,.06),0 2px 4px -2px rgba(15,23,42,.04);
   --shadow-lg:0 10px 15px -3px rgba(15,23,42,.08),0 4px 6px -4px rgba(15,23,42,.05);
@@ -27,14 +29,17 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button,input{font:inherit}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid rgba(15,111,101,.35);outline-offset:3px}
 .topbar{position:sticky;top:0;z-index:50;background:rgba(247,248,251,.85);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border-soft)}
 .topbar-inner{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 @media (max-width:700px){.topbar-inner{flex-wrap:wrap;padding:10px 14px;gap:10px}}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.02em;color:var(--ink);cursor:pointer;border:none;background:transparent;font-family:inherit}
-.brand-mark{width:32px;height:32px;background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:9px;display:grid;place-items:center;color:#fff;font-family:var(--arab);font-size:18px;line-height:1;box-shadow:var(--shadow-md)}
+.brand-mark{width:32px;height:32px;border-radius:9px;display:block;box-shadow:var(--shadow-md)}
+.brand-icon{display:block;width:32px;height:32px}
 .search-bar{flex:1;max-width:380px;position:relative}
-.search-bar input{width:100%;padding:9px 14px 9px 38px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;transition:all .15s}
+.search-bar input{width:100%;padding:9px 14px 9px 38px;background:var(--card);border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
 .search-bar input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
 .search-bar svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--ink-mute)}
 .topbar-nav{display:flex;gap:2px;background:var(--border-soft);padding:3px;border-radius:10px}
@@ -44,7 +49,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15p
 .search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);padding:6px;display:none;max-height:320px;overflow-y:auto;z-index:60}
 .search-dropdown.open{display:block}
 .search-dropdown-empty{padding:16px;text-align:center;font-size:13px;color:var(--ink-mute)}
-.search-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:8px;cursor:pointer}
+.search-item{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:8px;cursor:pointer;width:100%;border:none;background:transparent;text-align:left;color:inherit}
 .search-item:hover{background:var(--accent-soft)}
 .search-item .ar{font-family:var(--arab);font-size:22px;color:var(--ink);line-height:1;min-width:32px;text-align:center}
 .search-item-meta{display:flex;flex-direction:column;gap:2px}
@@ -54,13 +59,11 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15p
 @media (max-width:700px){.shell{padding:16px 14px 60px}}
 .with-aside{display:grid;gap:24px}
 @media (min-width:1000px){.with-aside{grid-template-columns:1fr 320px;gap:28px}}
-.notice-banner{background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-radius:var(--radius);padding:14px 18px;font-size:13px;color:var(--option-fg);margin-bottom:16px;line-height:1.5}
-.notice-banner strong{font-weight:700}
 .lemma-status-bar{background:var(--card);border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;border:1px solid var(--border-soft);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .lsb-text{font-size:13px;color:var(--ink-soft);line-height:1.5;flex:1;min-width:300px}
 .lsb-progress{display:flex;align-items:center;gap:10px;min-width:200px}
 .lsb-bar{flex:1;height:6px;background:var(--border-soft);border-radius:999px;overflow:hidden}
-.lsb-bar-fill{height:100%;background:linear-gradient(90deg,#6366F1,#8B5CF6);border-radius:999px;transition:width .3s}
+.lsb-bar-fill{height:100%;background:var(--accent);border-radius:999px}
 .lsb-pct{font-size:12px;font-weight:700;color:var(--accent);min-width:34px;text-align:right}
 .view-header{margin-bottom:24px}
 .view-title{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px}
@@ -72,7 +75,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15p
 .breadcrumb button:hover{color:var(--accent)}
 .breadcrumb .sep{opacity:.5}
 .hero{background:var(--card);border-radius:var(--radius-lg);padding:36px 32px;box-shadow:var(--shadow-md);display:grid;gap:24px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:300px;height:300px;background:radial-gradient(circle,rgba(79,70,229,.08) 0%,transparent 70%);pointer-events:none}
+.hero::before{content:'';position:absolute;inset:0 0 auto auto;width:160px;height:100%;background:linear-gradient(90deg,transparent,rgba(15,111,101,.08));pointer-events:none}
 .hero-main{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;position:relative}
 @media (max-width:600px){.hero{padding:28px 22px}.hero-main{grid-template-columns:1fr}}
 .hero-text h1{font-size:48px;font-weight:700;letter-spacing:-.03em;line-height:1.05;margin-bottom:8px}
@@ -115,7 +118,7 @@ body.filter-pflicht .mod-card[data-type="option"]{display:none}
 .form-grid dt{color:var(--ink-mute);font-weight:500}
 .form-grid dd .arab{font-family:var(--arab);font-size:22px;line-height:1;direction:rtl}
 .form-grid dd .mono{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;background:var(--card-soft);padding:2px 6px;border-radius:4px}
-.quran-card{background:linear-gradient(135deg,#FAFBFD,#F0F2F8);border-radius:12px;padding:16px 18px;margin:14px 0;border-left:3px solid var(--accent)}
+.quran-card{background:var(--card-soft);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:14px 0}
 .quran-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;background:var(--accent);color:#fff;border-radius:5px;margin-bottom:10px}
 .quran-text{font-style:italic;font-size:15px;line-height:1.55}
 .equiv-list{display:grid;gap:10px;margin-top:12px}
@@ -131,7 +134,7 @@ body.filter-pflicht .mod-card[data-type="option"]{display:none}
 .ex-card{background:var(--card-soft);border-radius:10px;padding:14px 16px;border:1px solid var(--border-soft)}
 .ex-context{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .ex-body{font-size:14px;line-height:1.55}
-.pending{background:var(--card-soft);border-left:3px solid var(--ink-mute);padding:10px 14px;border-radius:0 8px 8px 0;margin:10px 0;font-size:13px;color:var(--ink-soft);line-height:1.5}
+.pending{background:var(--card-soft);border:1px dashed var(--border);padding:10px 14px;border-radius:8px;margin:10px 0;font-size:13px;color:var(--ink-soft);line-height:1.5}
 .pending strong{color:var(--ink);font-weight:600}
 .aside{display:grid;gap:16px;align-content:start}
 @media (min-width:1000px){.aside{position:sticky;top:80px;align-self:start}}
@@ -158,7 +161,7 @@ body.filter-pflicht .mod-card[data-type="option"]{display:none}
 .chip .ar{font-family:var(--arab);font-size:17px;line-height:1}
 .chip .name{font-style:italic;font-weight:500}
 .chip .desc{font-size:11px;color:var(--ink-mute);border-left:1px solid var(--border);padding-left:8px}
-.path-card{background:linear-gradient(135deg,#EEF0FF,#F5F0FF);border-radius:var(--radius);padding:20px;border:1px solid var(--border-soft)}
+.path-card{background:var(--accent-soft);border-radius:var(--radius);padding:20px;border:1px solid var(--border-soft)}
 .path-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
 .path-node{font-style:italic;font-weight:600;padding:8px 14px;background:var(--card);border-radius:10px;font-size:14px;box-shadow:var(--shadow-sm);border:none;cursor:pointer;font-family:inherit}
 .path-node:hover{transform:translateY(-1px)}
@@ -169,13 +172,22 @@ body.filter-pflicht .mod-card[data-type="option"]{display:none}
 .lemma-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--accent)}
 .lemma-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .lemma-card-arab{font-family:var(--arab);font-size:40px;line-height:1;color:var(--ink);direction:rtl}
-.lemma-card-status{font-size:10px;font-weight:700;padding:4px 9px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
-.lemma-card-status.ready{background:var(--good-bg);color:var(--good-fg)}
-.lemma-card-status.partial{background:var(--mid-bg);color:var(--mid-fg)}
 .lemma-card-name{font-size:22px;font-weight:700;letter-spacing:-.02em}
 .lemma-card-trans{font-size:14px;color:var(--ink-soft);line-height:1.5}
-.lemma-card-bar{height:4px;background:var(--border-soft);border-radius:999px;overflow:hidden;margin-top:4px}
-.lemma-card-bar-fill{height:100%;background:linear-gradient(90deg,#6366F1,#8B5CF6)}
+.lemma-card-progress{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}
+.lemma-card-bar{height:4px;background:var(--border-soft);border-radius:999px;overflow:hidden}
+.lemma-card-bar-fill{height:100%;background:var(--accent)}
+.lemma-card-pct{font-size:12px;font-weight:700;color:var(--accent);min-width:36px;text-align:right}
+.mobile-module-nav{display:none}
+@media (max-width:999px){
+  .mobile-module-nav{position:sticky;top:104px;z-index:30;display:flex;gap:6px;overflow-x:auto;margin:14px -14px 12px;padding:8px 14px;background:rgba(243,246,245,.92);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);backdrop-filter:saturate(160%) blur(10px)}
+  .mobile-module-nav button{flex:0 0 auto;width:36px;height:34px;border:1px solid var(--border);border-radius:9px;background:var(--card);color:var(--ink-soft);font-weight:700;cursor:pointer}
+  .mobile-module-nav button:hover,.mobile-module-nav button:focus-visible{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
 .lemma-card-fields{display:flex;flex-wrap:wrap;gap:4px;padding-top:8px;border-top:1px solid var(--border-soft)}
 .lemma-card-field{font-size:11px;color:var(--ink-mute);padding:2px 7px;background:var(--card-soft);border-radius:999px}
 .themes-grid{display:grid;gap:16px}
@@ -197,21 +209,20 @@ body.filter-pflicht .mod-card[data-type="option"]{display:none}
 <body>
 <header class="topbar">
   <div class="topbar-inner">
-    <button class="brand" onclick="goView('lexikon')"><div class="brand-mark">م</div><span>Miftāḥ</span></button>
+    <button class="brand" data-view="lexikon"><span class="brand-mark"><img class="brand-icon" src="assets/miftah-icon.png" alt=""></span><span>Miftāḥ</span></button>
     <div class="search-bar">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-      <input type="text" id="search-input" placeholder="Begriff suchen…" oninput="onSearch(this.value)" onfocus="onSearch(this.value)" onblur="setTimeout(closeSearch,200)">
+      <input type="text" id="search-input" placeholder="Begriff suchen…" autocomplete="off" aria-controls="search-dropdown" aria-expanded="false">
       <div class="search-dropdown" id="search-dropdown"></div>
     </div>
     <nav class="topbar-nav">
-      <button id="nav-lexikon" onclick="goView('lexikon')">Lexikon</button>
-      <button id="nav-themen" onclick="goView('themen')">Themen</button>
-      <button id="nav-pfade" onclick="goView('pfade')">Lernpfade</button>
+      <button id="nav-lexikon" data-view="lexikon">Lexikon</button>
+      <button id="nav-themen" data-view="themen">Themen</button>
+      <button id="nav-pfade" data-view="pfade">Lernpfade</button>
     </nav>
   </div>
 </header>
 <div class="shell">
-  <div class="notice-banner"><strong>Prototyp-Status:</strong>&nbsp;Diese Version zeigt alle sechs Lemmata mit dem jeweils aktuellen Bearbeitungsstand. Vollständig ausgearbeitet ist <em>Taqwā</em>; die übrigen Einträge wachsen iterativ mit der Befüllung.</div>
   <section class="view active" id="view-lexikon">
     <div class="view-header"><h2 class="view-title">Lexikon</h2><p class="view-subtitle">Sechs Schlüsselbegriffe im Initialkorpus, alphabetisch geordnet</p></div>
     <div class="lemma-grid" id="lemma-grid"></div>
@@ -336,7 +347,7 @@ moduleContent.taqwa = {
   8: { html: `<div class="connect-group">
       <div class="connect-label">Kohyponyme · Verwandte religiös-ethische Begriffe</div>
       <div class="connect-chips">
-        <button class="chip" onclick="goView('detail',{lemmaId:'iman'})"><span class="ar">إِيمَان</span><span class="name">Īmān</span><span class="desc">Glaube</span></button>
+        <button class="chip" data-view="detail" data-lemma-id="iman"><span class="ar">إِيمَان</span><span class="name">Īmān</span><span class="desc">Glaube</span></button>
         <span class="chip static"><span class="ar">إِحْسَان</span><span class="name">Iḥsān</span><span class="desc">Erweiterung</span></span>
         <span class="chip static"><span class="ar">خُشُوع</span><span class="name">Khushūʿ</span><span class="desc">Erweiterung</span></span>
       </div>
@@ -354,7 +365,7 @@ moduleContent.taqwa = {
     </div>
     <div class="path-card">
       <div class="connect-label">Lernpfad · Innere Spiritualität</div>
-      <div class="path-flow"><button class="path-node current">Taqwā</button><span class="path-arrow">→</span><button class="path-node" onclick="goView('detail',{lemmaId:'iman'})">Īmān</button></div>
+      <div class="path-flow"><button class="path-node current">Taqwā</button><span class="path-arrow">→</span><button class="path-node" data-view="detail" data-lemma-id="iman">Īmān</button></div>
     </div>` }
 };
 
@@ -397,12 +408,12 @@ moduleContent.zakat = {
   7: { html: `<div class="pending"><strong>📝 Modul 7 — Beispiele:</strong> Drei kontrastive Szenarien zu liefern. Vorschläge: <span class="term">Zakāt al-Māl</span> vs. <span class="term">Zakāt al-Fiṭr</span> · Zakāt im Ramadan vs. ganzjährig · Zakāt als individuelle Pflicht vs. organisierte Verteilung.</div>` },
   8: { html: `<div class="connect-group">
       <div class="connect-label">Antonym / Kontrast</div>
-      <div class="connect-chips"><button class="chip" onclick="goView('detail',{lemmaId:'sadaqa'})"><span class="ar">صَدَقَة</span><span class="name">Ṣadaqa</span><span class="desc">freiwillig vs. Pflicht</span></button></div>
+      <div class="connect-chips"><button class="chip" data-view="detail" data-lemma-id="sadaqa"><span class="ar">صَدَقَة</span><span class="name">Ṣadaqa</span><span class="desc">freiwillig vs. Pflicht</span></button></div>
     </div>
     <div class="connect-group">
       <div class="connect-label">Kohyponyme · Fünf Säulen</div>
       <div class="connect-chips">
-        <button class="chip" onclick="goView('detail',{lemmaId:'salah'})"><span class="ar">صَلَاة</span><span class="name">Ṣalāh</span><span class="desc">Pflichtgebet</span></button>
+        <button class="chip" data-view="detail" data-lemma-id="salah"><span class="ar">صَلَاة</span><span class="name">Ṣalāh</span><span class="desc">Pflichtgebet</span></button>
         <span class="chip static"><span class="ar">صَوْم</span><span class="name">Ṣawm</span><span class="desc">Fasten</span></span>
         <span class="chip static"><span class="ar">حَجّ</span><span class="name">Ḥajj</span><span class="desc">Pilgerfahrt</span></span>
         <span class="chip static"><span class="ar">شَهَادَة</span><span class="name">Šahāda</span><span class="desc">Glaubensbekenntnis</span></span>
@@ -422,7 +433,7 @@ moduleContent.zakat = {
     </div>
     <div class="path-card">
       <div class="connect-label">Lernpfad · Geben im Islam</div>
-      <div class="path-flow"><button class="path-node current">Zakāt</button><span class="path-arrow">→</span><button class="path-node" onclick="goView('detail',{lemmaId:'sadaqa'})">Ṣadaqa</button></div>
+      <div class="path-flow"><button class="path-node current">Zakāt</button><span class="path-arrow">→</span><button class="path-node" data-view="detail" data-lemma-id="sadaqa">Ṣadaqa</button></div>
     </div>
     <div class="pending"><strong>📝 Zu liefern:</strong> Verifikation der acht Empfängerkategorien aus Quran 9:60.</div>` }
 };
@@ -460,7 +471,7 @@ moduleContent.iman = {
   8: { html: `<div class="connect-group">
       <div class="connect-label">Kohyponyme</div>
       <div class="connect-chips">
-        <button class="chip" onclick="goView('detail',{lemmaId:'taqwa'})"><span class="ar">تَقْوَى</span><span class="name">Taqwā</span><span class="desc">Gottesbewusstsein</span></button>
+        <button class="chip" data-view="detail" data-lemma-id="taqwa"><span class="ar">تَقْوَى</span><span class="name">Taqwā</span><span class="desc">Gottesbewusstsein</span></button>
         <span class="chip static"><span class="ar">إِحْسَان</span><span class="name">Iḥsān</span><span class="desc">Vorbildliches Tun</span></span>
       </div>
     </div>
@@ -506,7 +517,7 @@ moduleContent.sadaqa = {
   7: { html: `<div class="pending"><strong>📝 Modul 7 — Beispiele:</strong> drei Szenarien zu liefern. Vorschläge: „Ṣadaqa als Geste", „Ṣadaqa im Verborgenen", „<span class="term">Ṣadaqa jāriya</span>".</div>` },
   8: { html: `<div class="connect-group">
       <div class="connect-label">Antonym / Kontrast</div>
-      <div class="connect-chips"><button class="chip" onclick="goView('detail',{lemmaId:'zakat'})"><span class="ar">زَكَاة</span><span class="name">Zakāt</span><span class="desc">Pflicht vs. freiwillig</span></button></div>
+      <div class="connect-chips"><button class="chip" data-view="detail" data-lemma-id="zakat"><span class="ar">زَكَاة</span><span class="name">Zakāt</span><span class="desc">Pflicht vs. freiwillig</span></button></div>
     </div>
     <div class="connect-group">
       <div class="connect-label">Etymologische Verwandte · Wurzel ṣ-d-q</div>
@@ -517,7 +528,7 @@ moduleContent.sadaqa = {
     </div>
     <div class="path-card">
       <div class="connect-label">Lernpfad · Geben im Islam</div>
-      <div class="path-flow"><button class="path-node" onclick="goView('detail',{lemmaId:'zakat'})">Zakāt</button><span class="path-arrow">→</span><button class="path-node current">Ṣadaqa</button></div>
+      <div class="path-flow"><button class="path-node" data-view="detail" data-lemma-id="zakat">Zakāt</button><span class="path-arrow">→</span><button class="path-node current">Ṣadaqa</button></div>
     </div>` }
 };
 
@@ -555,7 +566,7 @@ moduleContent.salah = {
       <div class="connect-label">Kohyponyme · Fünf Säulen</div>
       <div class="connect-chips">
         <span class="chip static"><span class="ar">شَهَادَة</span><span class="name">Šahāda</span></span>
-        <button class="chip" onclick="goView('detail',{lemmaId:'zakat'})"><span class="ar">زَكَاة</span><span class="name">Zakāt</span></button>
+        <button class="chip" data-view="detail" data-lemma-id="zakat"><span class="ar">زَكَاة</span><span class="name">Zakāt</span></button>
         <span class="chip static"><span class="ar">صَوْم</span><span class="name">Ṣawm</span></span>
         <span class="chip static"><span class="ar">حَجّ</span><span class="name">Ḥajj</span></span>
       </div>
@@ -634,18 +645,18 @@ function goView(view, opts) {
 function renderLexikon() {
   const sorted = Object.values(lemmata).sort((a, b) => a.name.localeCompare(b.name));
   document.getElementById('lemma-grid').innerHTML = sorted.map(l => {
-    const statusCls = l.completeness === 'full' ? 'ready' : 'partial';
-    const statusLbl = l.completeness === 'full' ? '✓ Vollständig' : `⚠ ${l.completenessPct}% bearbeitet`;
-    return `<button class="lemma-card" onclick="goView('detail',{lemmaId:'${l.id}'})">
+    return `<button class="lemma-card" data-view="detail" data-lemma-id="${l.id}">
       <div class="lemma-card-top">
         <div class="lemma-card-arab">${l.arab}</div>
-        <span class="lemma-card-status ${statusCls}">${statusLbl}</span>
       </div>
       <div>
         <div class="lemma-card-name"><em>${l.name}</em></div>
         <div class="lemma-card-trans">${l.coreTranslation}</div>
       </div>
-      <div class="lemma-card-bar"><div class="lemma-card-bar-fill" style="width:${l.completenessPct}%"></div></div>
+      <div class="lemma-card-progress" aria-label="${l.completenessPct}% vollständig">
+        <div class="lemma-card-bar"><div class="lemma-card-bar-fill" style="width:${l.completenessPct}%"></div></div>
+        <span class="lemma-card-pct">${l.completenessPct}%</span>
+      </div>
       <div class="lemma-card-fields">${l.fields.map(f => `<span class="lemma-card-field">${f}</span>`).join('')}</div>
     </button>`;
   }).join('');
@@ -662,7 +673,7 @@ function renderThemen() {
       <p class="theme-desc">${t.desc}</p>
       <div class="theme-lemmata">${t.lemmata.map(lid => {
         const l = lemmata[lid];
-        return `<button class="chip" onclick="goView('detail',{lemmaId:'${l.id}'})"><span class="ar">${l.arab}</span><span class="name">${l.name}</span><span class="desc">${l.coreTranslation}</span></button>`;
+        return `<button class="chip" data-view="detail" data-lemma-id="${l.id}"><span class="ar">${l.arab}</span><span class="name">${l.name}</span><span class="desc">${l.coreTranslation}</span></button>`;
       }).join('')}</div>
     </div>`).join('');
 }
@@ -680,7 +691,7 @@ function renderPfade() {
         ${p.sequence.map((lid, i) => {
           const l = lemmata[lid];
           const arrow = (i < p.sequence.length - 1 || p.extended.length > 0) ? '<span class="path-arrow">→</span>' : '';
-          return `<button class="path-node" onclick="goView('detail',{lemmaId:'${l.id}'})">${l.name}</button>${arrow}`;
+          return `<button class="path-node" data-view="detail" data-lemma-id="${l.id}">${l.name}</button>${arrow}`;
         }).join('')}
         ${p.extended.map((ext, i) => {
           const arrow = i < p.extended.length - 1 ? '<span class="path-arrow">→</span>' : '';
@@ -709,12 +720,12 @@ function renderModule(num, lemmaId) {
 function renderDetail(lemmaId) {
   const l = lemmata[lemmaId];
   const otherLemmata = Object.values(lemmata).filter(x => x.id !== lemmaId);
-  const fieldsHtml = l.fields.map(f => `<button class="tag" onclick="goView('themen')">${f}</button>`).join('');
+  const fieldsHtml = l.fields.map(f => `<button class="tag" data-view="themen">${f}</button>`).join('');
   const completePctText = l.completeness === 'full' ? '' :
     `<div class="lemma-status-bar"><div class="lsb-text">Dieser Eintrag ist im Bearbeitungsstand und wächst iterativ. Sichtbare „Zu liefern"-Boxen markieren, was noch beigebracht werden muss.</div><div class="lsb-progress"><div class="lsb-bar"><div class="lsb-bar-fill" style="width:${l.completenessPct}%"></div></div><span class="lsb-pct">${l.completenessPct}%</span></div></div>`;
   const modulesHtml = [1,2,3,4,5,6,7,8].map(n => renderModule(n, lemmaId)).join('');
   document.getElementById('detail-content').innerHTML = `
-    <div class="breadcrumb"><button onclick="goView('lexikon')">Lexikon</button><span class="sep">/</span><span>${l.name}</span></div>
+    <div class="breadcrumb"><button data-view="lexikon">Lexikon</button><span class="sep">/</span><span>${l.name}</span></div>
     ${completePctText}
     <div class="with-aside">
       <main>
@@ -735,22 +746,25 @@ function renderDetail(lemmaId) {
         </section>
         <div class="toolbar">
           <span class="toolbar-title">Module · 8</span>
-          <div class="filter-pills"><button class="active" onclick="setFilter('alle',this)">Alle</button><button onclick="setFilter('pflicht',this)">Nur Pflicht</button></div>
+          <div class="filter-pills"><button class="active" data-filter="alle">Alle</button><button data-filter="pflicht">Nur Pflicht</button></div>
         </div>
+        <nav class="mobile-module-nav" aria-label="Module">
+          ${[1,2,3,4,5,6,7,8].map(n => `<button data-module-target="m${n}" aria-label="Modul ${n}">${n}</button>`).join('')}
+        </nav>
         <div class="modules">${modulesHtml}</div>
       </main>
       <aside class="aside">
         <div class="aside-card">
           <div class="aside-title">Module · Sprungnavigation</div>
           <ol class="nav-list">
-            <li><button onclick="document.getElementById('m1').scrollIntoView()"><span class="nav-num">1</span>Form & Erschließung<span class="nav-dot pflicht"></span></button></li>
-            <li><button onclick="document.getElementById('m2').scrollIntoView()"><span class="nav-num">2</span>Kernbedeutung<span class="nav-dot pflicht"></span></button></li>
-            <li><button onclick="document.getElementById('m3').scrollIntoView()"><span class="nav-num">3</span>Bedeutungsvarianten<span class="nav-dot pflicht"></span></button></li>
-            <li><button onclick="document.getElementById('m4').scrollIntoView()"><span class="nav-num">4</span>Kontext<span class="nav-dot"></span></button></li>
-            <li><button onclick="document.getElementById('m5').scrollIntoView()"><span class="nav-num">5</span>Gebrauchspragmatik<span class="nav-dot"></span></button></li>
-            <li><button onclick="document.getElementById('m6').scrollIntoView()"><span class="nav-num">6</span>Äquivalenz<span class="nav-dot"></span></button></li>
-            <li><button onclick="document.getElementById('m7').scrollIntoView()"><span class="nav-num">7</span>Beispiele<span class="nav-dot"></span></button></li>
-            <li><button onclick="document.getElementById('m8').scrollIntoView()"><span class="nav-num">8</span>Vernetzung<span class="nav-dot"></span></button></li>
+            <li><button data-module-target="m1"><span class="nav-num">1</span>Form & Erschließung<span class="nav-dot pflicht"></span></button></li>
+            <li><button data-module-target="m2"><span class="nav-num">2</span>Kernbedeutung<span class="nav-dot pflicht"></span></button></li>
+            <li><button data-module-target="m3"><span class="nav-num">3</span>Bedeutungsvarianten<span class="nav-dot pflicht"></span></button></li>
+            <li><button data-module-target="m4"><span class="nav-num">4</span>Kontext<span class="nav-dot"></span></button></li>
+            <li><button data-module-target="m5"><span class="nav-num">5</span>Gebrauchspragmatik<span class="nav-dot"></span></button></li>
+            <li><button data-module-target="m6"><span class="nav-num">6</span>Äquivalenz<span class="nav-dot"></span></button></li>
+            <li><button data-module-target="m7"><span class="nav-num">7</span>Beispiele<span class="nav-dot"></span></button></li>
+            <li><button data-module-target="m8"><span class="nav-num">8</span>Vernetzung<span class="nav-dot"></span></button></li>
           </ol>
         </div>
         <div class="aside-card">
@@ -759,7 +773,7 @@ function renderDetail(lemmaId) {
             ${otherLemmata.map(o => {
               const cls = o.completeness === 'full' ? '' : 'in-prog';
               const pct = o.completeness === 'full' ? '' : `<span class="pct-tag">${o.completenessPct}%</span>`;
-              return `<li><button class="${cls}" onclick="goView('detail',{lemmaId:'${o.id}'})"><span class="nav-arab">${o.arab.charAt(0)}</span>${o.name}${pct}</button></li>`;
+              return `<li><button class="${cls}" data-view="detail" data-lemma-id="${o.id}"><span class="nav-arab">${o.arab.charAt(0)}</span>${o.name}${pct}</button></li>`;
             }).join('')}
           </ol>
         </div>
@@ -775,28 +789,74 @@ function setFilter(mode, button) {
 }
 
 // === SEARCH ===
+function normalizeSearchText(value) {
+  return value
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase();
+}
+
 function onSearch(q) {
   const dropdown = document.getElementById('search-dropdown');
-  q = q.trim().toLowerCase();
+  const normalizedQuery = normalizeSearchText(q.trim());
   let matches = Object.values(lemmata);
-  if (q.length > 0) matches = matches.filter(l => l.name.toLowerCase().includes(q) || l.coreTranslation.toLowerCase().includes(q) || l.arab.includes(q));
+  if (normalizedQuery.length > 0) {
+    matches = matches.filter(l => {
+      const searchableText = normalizeSearchText(`${l.name} ${l.coreTranslation} ${l.fields.join(' ')} ${l.rootLatin}`);
+      return searchableText.includes(normalizedQuery) || l.arab.includes(q.trim());
+    });
+  }
   if (matches.length === 0) {
     dropdown.innerHTML = '<div class="search-dropdown-empty">Keine Treffer</div>';
   } else {
     dropdown.innerHTML = matches.map(l => {
-      const note = l.completeness === 'full' ? '' : ` · ${l.completenessPct}% bearbeitet`;
-      return `<div class="search-item" onmousedown="goView('detail',{lemmaId:'${l.id}'});closeSearch();document.getElementById('search-input').value='';">
+      const note = ` · ${l.completenessPct}%`;
+      return `<button class="search-item" type="button" data-view="detail" data-lemma-id="${l.id}">
         <span class="ar">${l.arab}</span>
         <div class="search-item-meta">
           <span class="search-item-name">${l.name}</span>
           <span class="search-item-trans">${l.coreTranslation}${note}</span>
         </div>
-      </div>`;
+      </button>`;
     }).join('');
   }
   dropdown.classList.add('open');
+  document.getElementById('search-input').setAttribute('aria-expanded', 'true');
 }
-function closeSearch() { document.getElementById('search-dropdown').classList.remove('open'); }
+function closeSearch() {
+  document.getElementById('search-dropdown').classList.remove('open');
+  document.getElementById('search-input').setAttribute('aria-expanded', 'false');
+}
+
+document.addEventListener('click', event => {
+  const viewTarget = event.target.closest('[data-view]');
+  if (viewTarget) {
+    const view = viewTarget.dataset.view;
+    const opts = viewTarget.dataset.lemmaId ? { lemmaId: viewTarget.dataset.lemmaId } : undefined;
+    goView(view, opts);
+    if (viewTarget.classList.contains('search-item')) {
+      closeSearch();
+      document.getElementById('search-input').value = '';
+    }
+    return;
+  }
+
+  const moduleTarget = event.target.closest('[data-module-target]');
+  if (moduleTarget) {
+    document.getElementById(moduleTarget.dataset.moduleTarget)?.scrollIntoView();
+    return;
+  }
+
+  const filterTarget = event.target.closest('[data-filter]');
+  if (filterTarget) {
+    setFilter(filterTarget.dataset.filter, filterTarget);
+  }
+});
+
+const searchInput = document.getElementById('search-input');
+searchInput.addEventListener('input', event => onSearch(event.target.value));
+searchInput.addEventListener('focus', event => onSearch(event.target.value));
+searchInput.addEventListener('blur', () => window.setTimeout(closeSearch, 200));
 
 goView('lexikon');
 </script>
